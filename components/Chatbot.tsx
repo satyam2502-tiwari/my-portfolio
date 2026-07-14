@@ -9,9 +9,8 @@ export default function Chatbot() {
   const [localInput, setLocalInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { messages, sendMessage, status, error } =
+  const { messages, append, status, error } =
     useChat({
-      api: "/api/chat",
       initialMessages: [
         {
           id: "welcome",
@@ -151,7 +150,7 @@ export default function Chatbot() {
           onSubmit={(e) => {
             e.preventDefault();
             if (!limitReached && localInput.trim()) {
-              sendMessage({ role: "user", content: localInput });
+              append({ role: "user", content: localInput });
               setLocalInput("");
             }
           }}
